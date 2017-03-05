@@ -92,13 +92,13 @@ if [ ! -f "$STORAGE_ROOT/dns/dnssec/$algo.conf" ]; then
 	# ldns-keygen uses /dev/random for generating random numbers by default.
 	# This is slow and unecessary if we ensure /dev/urandom is seeded properly,
 	# so we use /dev/urandom. See system.sh for an explanation. See #596, #115.
-	KSK=$(umask 077; cd $STORAGE_ROOT/dns/dnssec; ldns-keygen -r /dev/urandom -a $algo -b 2048 -k _domain_);
+	KSK=$(umask 077; cd $STORAGE_ROOT/dns/dnssec; ldns-keygen -r /dev/urandom -a $algo -b 4096 -k _domain_);
 
 	# Now create a Zone-Signing Key (ZSK) which is expected to be
 	# rotated more often than a KSK, although we have no plans to
 	# rotate it (and doing so would be difficult to do without
 	# disturbing DNS availability.) Omit `-k` and use a shorter key length.
-	ZSK=$(umask 077; cd $STORAGE_ROOT/dns/dnssec; ldns-keygen -r /dev/urandom -a $algo -b 1024 _domain_);
+	ZSK=$(umask 077; cd $STORAGE_ROOT/dns/dnssec; ldns-keygen -r /dev/urandom -a $algo -b 4096 _domain_);
 
 	# These generate two sets of files like:
 	#

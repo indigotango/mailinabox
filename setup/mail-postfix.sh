@@ -123,7 +123,7 @@ tools/editconf.py /etc/postfix/main.cf \
 	smtpd_tls_auth_only=yes \
 	smtpd_tls_cert_file=$STORAGE_ROOT/ssl/ssl_certificate.pem \
 	smtpd_tls_key_file=$STORAGE_ROOT/ssl/ssl_private_key.pem \
-	smtpd_tls_dh1024_param_file=$STORAGE_ROOT/ssl/dh2048.pem \
+	smtpd_tls_dh1024_param_file=$STORAGE_ROOT/ssl/dh4096.pem \
 	smtpd_tls_protocols=\!SSLv2,\!SSLv3 \
 	smtpd_tls_ciphers=medium \
 	smtpd_tls_exclude_ciphers=aNULL,RC4 \
