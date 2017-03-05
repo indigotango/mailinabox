@@ -39,6 +39,11 @@ sed "s#STORAGE_ROOT#$STORAGE_ROOT#" \
 tools/editconf.py /etc/nginx/nginx.conf -s \
 	server_names_hash_bucket_size="128;"
 
+# Change default user for Nginx process from "nginx" to "www-data"
+# to match PHP-FPM process user and allow operation of PHP scripts.
+tools/editconf.py /etc/nginx/nginx.conf -s \
+    user="www-data;"
+
 # Tell PHP not to expose its version number in the X-Powered-By header.
 tools/editconf.py /etc/php5/fpm/php.ini -c ';' \
 	expose_php=Off
