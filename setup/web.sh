@@ -36,8 +36,8 @@ sed "s#STORAGE_ROOT#$STORAGE_ROOT#" \
 # 64 in 2014 to accommodate a long domain name (20 characters?). But
 # even at 64, a 58-character domain name won't work (#93), so now
 # we're going up to 128.
-tools/editconf.py /etc/nginx/nginx.conf -s \
-	server_names_hash_bucket_size="128;"
+#tools/editconf.py /etc/nginx/nginx.conf -s \
+#	server_names_hash_bucket_size="128;"
 
 # Change default user for Nginx process from "nginx" to "www-data"
 # to match PHP-FPM process user and allow operation of PHP scripts.

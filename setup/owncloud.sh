@@ -216,6 +216,10 @@ EOF
 ?>
 EOF
 
+    # Print generated admin password for user
+    echo "ownCloud root password:\n"
+    echo $adminpassword
+
 	# Set permissions
 	chown -R www-data.www-data $STORAGE_ROOT/owncloud /usr/local/lib/owncloud
 
