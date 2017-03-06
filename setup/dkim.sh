@@ -21,6 +21,14 @@ mkdir -p $STORAGE_ROOT/mail/dkim
 # Not quite sure why.
 echo "127.0.0.1" > /etc/opendkim/TrustedHosts
 
+# Create KeyTable file
+echo "mail._domainkey.${PRIMARY_HOSTNAME} ${PRIMARY_HOSTNAME}:mail:" \
+    "${STORAGE_ROOT}/mail/dkim/mail.private" > /etc/opendkim/KeyTable
+
+# Create SigningTable file
+echo "*@${PRIMARY_HOSTNAME} mail._domainkey.{PRIMARY_HOSTNAME}" \
+    > /etc/opendkim/SigningTable
+
 if grep -q "ExternalIgnoreList" /etc/opendkim.conf; then
 	true # already done #NODOC
 else
