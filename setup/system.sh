@@ -313,6 +313,9 @@ cat conf/fail2ban/jails.conf \
 	> /etc/fail2ban/jail.d/mailinabox.conf
 cp -f conf/fail2ban/filter.d/* /etc/fail2ban/filter.d/
 
+# Create /var/log/mail.log file, because Fail2Ban won't start without this logfile.
+touch /var/log/mail.log
+
 # On first installation, the log files that the jails look at don't all exist.
 # e.g., The roundcube error log isn't normally created until someone logs into
 # Roundcube for the first time. This causes fail2ban to fail to start. Later
