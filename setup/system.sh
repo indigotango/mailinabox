@@ -313,8 +313,14 @@ cat conf/fail2ban/jails.conf \
 	> /etc/fail2ban/jail.d/mailinabox.conf
 cp -f conf/fail2ban/filter.d/* /etc/fail2ban/filter.d/
 
-# Create /var/log/mail.log file, because Fail2Ban won't start without this logfile.
+# Create empty log files to allow Fail2Ban to start, prior to services being brought up.
 touch /var/log/mail.log
+mkdir -p /var/log/nginx
+touch /var/log/nginx/access.log
+mkdir -p /home/user-data/owncloud
+touch /home/user-data/owncloud/owncloud.log
+mkdir -p /var/log/roundcubemail
+touch /var/log/roundcubemail/errors
 
 # On first installation, the log files that the jails look at don't all exist.
 # e.g., The roundcube error log isn't normally created until someone logs into
