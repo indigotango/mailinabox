@@ -70,26 +70,26 @@ if [ $needs_update == 1 ]; then
 	rm -f /tmp/roundcube.tgz
 
 	# install roundcube autoreply/vacation plugin
-	git_clone https://github.com/arodier/Roundcube-Plugins.git $VACATION_SIEVE_VERSION plugins/vacation_sieve ${RCM_PLUGIN_DIR}/vacation_sieve
+#	git_clone https://github.com/arodier/Roundcube-Plugins.git $VACATION_SIEVE_VERSION plugins/vacation_sieve ${RCM_PLUGIN_DIR}/vacation_sieve
 
 	# install roundcube persistent_login plugin
-	git_clone https://github.com/mfreiholz/Roundcube-Persistent-Login-Plugin.git $PERSISTENT_LOGIN_VERSION '' ${RCM_PLUGIN_DIR}/persistent_login
+#	git_clone https://github.com/mfreiholz/Roundcube-Persistent-Login-Plugin.git $PERSISTENT_LOGIN_VERSION '' ${RCM_PLUGIN_DIR}/persistent_login
 
 	# install roundcube html5_notifier plugin
-	git_clone https://github.com/kitist/html5_notifier.git $HTML5_NOTIFIER_VERSION '' ${RCM_PLUGIN_DIR}/html5_notifier
+#	git_clone https://github.com/kitist/html5_notifier.git $HTML5_NOTIFIER_VERSION '' ${RCM_PLUGIN_DIR}/html5_notifier
 
 	# download and verify the full release of the carddav plugin
-	wget_verify \
-		https://github.com/blind-coder/rcmcarddav/releases/download/v${CARDDAV_VERSION}/carddav-${CARDDAV_VERSION}.zip \
-		$CARDDAV_HASH \
-		/tmp/carddav.zip
+#	wget_verify \
+#		https://github.com/blind-coder/rcmcarddav/releases/download/v${CARDDAV_VERSION}/carddav-${CARDDAV_VERSION}.zip \
+#		$CARDDAV_HASH \
+#		/tmp/carddav.zip
 
 	# unzip and cleanup
-	unzip -q /tmp/carddav.zip -d ${RCM_PLUGIN_DIR}
-	rm -f /tmp/carddav.zip
+#	unzip -q /tmp/carddav.zip -d ${RCM_PLUGIN_DIR}
+#	rm -f /tmp/carddav.zip
 
 	# record the version we've installed
-	echo $UPDATE_KEY > ${RCM_DIR}/version
+#	echo $UPDATE_KEY > ${RCM_DIR}/version
 fi
 
 # ### Configuring Roundcube
@@ -120,7 +120,7 @@ cat > $RCM_CONFIG <<EOF;
 \$config['smtp_pass'] = '%p';
 #\$config['support_url'] = 'https://mailinabox.email/';
 #\$config['product_name'] = '$PRIMARY_HOSTNAME Webmail';
-\$config['product_name'] = '$PRIMARY_HOSTNAME Webmail';
+\$config['product_name'] = 'Webmail';
 \$config['des_key'] = '$SECRET_KEY';
 \$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'vacation_sieve', 'persistent_login', 'carddav');
 \$config['skin'] = 'classic';
