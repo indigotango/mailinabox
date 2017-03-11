@@ -122,7 +122,8 @@ cat > $RCM_CONFIG <<EOF;
 #\$config['product_name'] = '$PRIMARY_HOSTNAME Webmail';
 \$config['product_name'] = 'Webmail';
 \$config['des_key'] = '$SECRET_KEY';
-\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'vacation_sieve', 'persistent_login', 'carddav');
+#\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'vacation_sieve', 'persistent_login', 'carddav');
+\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui');
 \$config['skin'] = 'classic';
 \$config['login_autocomplete'] = 2;
 \$config['password_charset'] = 'UTF-8';
@@ -131,46 +132,46 @@ cat > $RCM_CONFIG <<EOF;
 EOF
 
 # Configure CardDav
-cat > ${RCM_PLUGIN_DIR}/carddav/config.inc.php <<EOF;
-<?php
-/* Do not edit. Written by Mail-in-a-Box. Regenerated on updates. */
-\$prefs['ownCloud'] = array(
-	 // required attributes
-	 'name'         =>  'ownCloud',
-	 // will be substituted for the roundcube username
-	 'username'     =>  '%u',
-	 // will be substituted for the roundcube password
-	 'password'     =>  '%p',
-	 // %u will be substituted for the CardDAV username
-	 'url'          =>  'https://${PRIMARY_HOSTNAME}/cloud/remote.php/carddav/addressbooks/%u/contacts',
-	 'active'       =>  true,
-	 'readonly'     =>  false,
-	 'refresh_time' => '02:00:00',
-	 'fixed'        =>  array('username','password'),
-	 'preemptive_auth' => '1',
-	 'hide'        =>  false,
-);
-EOF
+#cat > ${RCM_PLUGIN_DIR}/carddav/config.inc.php <<EOF;
+#<?php
+#/* Do not edit. Written by Mail-in-a-Box. Regenerated on updates. */
+#\$prefs['ownCloud'] = array(
+#	 // required attributes
+#	 'name'         =>  'ownCloud',
+#	 // will be substituted for the roundcube username
+#	 'username'     =>  '%u',
+#	 // will be substituted for the roundcube password
+#	 'password'     =>  '%p',
+#	 // %u will be substituted for the CardDAV username
+#	 'url'          =>  'https://${PRIMARY_HOSTNAME}/cloud/remote.php/carddav/addressbooks/%u/contacts',
+#	 'active'       =>  true,
+#	 'readonly'     =>  false,
+#	 'refresh_time' => '02:00:00',
+#	 'fixed'        =>  array('username','password'),
+#	 'preemptive_auth' => '1',
+#	 'hide'        =>  false,
+#);
+#EOF
 
 # Configure vaction_sieve.
-cat > /usr/local/lib/roundcubemail/plugins/vacation_sieve/config.inc.php <<EOF;
-<?php
-/* Do not edit. Written by Mail-in-a-Box. Regenerated on updates. */
-\$rcmail_config['vacation_sieve'] = array(
-    'date_format' => 'd/m/Y',
-    'working_hours' => array(8,18),
-    'msg_format' => 'text',
-    'logon_transform' => array('#([a-z])[a-z]+(\.|\s)([a-z])#i', '\$1\$3'),
-    'transfer' => array(
-        'mode' =>  'managesieve',
-        'ms_activate_script' => true,
-        'host'   => '127.0.0.1',
-        'port'   => '4190',
-        'usetls' => false,
-        'path' => 'vacation',
-    )
-);
-EOF
+#cat > /usr/local/lib/roundcubemail/plugins/vacation_sieve/config.inc.php <<EOF;
+#<?php
+#/* Do not edit. Written by Mail-in-a-Box. Regenerated on updates. */
+#\$rcmail_config['vacation_sieve'] = array(
+#    'date_format' => 'd/m/Y',
+#    'working_hours' => array(8,18),
+#    'msg_format' => 'text',
+#    'logon_transform' => array('#([a-z])[a-z]+(\.|\s)([a-z])#i', '\$1\$3'),
+#    'transfer' => array(
+#        'mode' =>  'managesieve',
+#        'ms_activate_script' => true,
+#        'host'   => '127.0.0.1',
+#        'port'   => '4190',
+#        'usetls' => false,
+#        'path' => 'vacation',
+#    )
+#);
+#EOF
 
 # Create writable directories.
 mkdir -p /var/log/roundcubemail /tmp/roundcubemail $STORAGE_ROOT/mail/roundcube
@@ -204,9 +205,9 @@ chown root.www-data $STORAGE_ROOT/mail/users.sqlite
 chmod 664 $STORAGE_ROOT/mail/users.sqlite
 
 # Fix Carddav permissions:
-chown -f -R root.www-data ${RCM_PLUGIN_DIR}/carddav
+#chown -f -R root.www-data ${RCM_PLUGIN_DIR}/carddav
 # root.www-data need all permissions, others only read
-chmod -R 774 ${RCM_PLUGIN_DIR}/carddav
+#chmod -R 774 ${RCM_PLUGIN_DIR}/carddav
 
 # Run Roundcube database migration script (database is created if it does not exist)
 ${RCM_DIR}/bin/updatedb.sh --dir ${RCM_DIR}/SQL --package roundcube
