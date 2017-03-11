@@ -123,7 +123,7 @@ cat > $RCM_CONFIG <<EOF;
 \$config['product_name'] = 'Webmail';
 \$config['des_key'] = '$SECRET_KEY';
 #\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'vacation_sieve', 'persistent_login', 'carddav');
-\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui');
+\$config['plugins'] = array('archive', 'zipdownload', 'password', 'managesieve', 'jqueryui');
 \$config['skin'] = 'classic';
 \$config['login_autocomplete'] = 2;
 \$config['password_charset'] = 'UTF-8';
