@@ -59,6 +59,14 @@ done
 # Create a 'state' directory. Not sure why we need to do this manually.
 mkdir -p /var/lib/munin-node/plugin-state/
 
+# Workaround for Munin service failing to start
+# Error in current version of Ubuntu 16.04:
+# “Unit munin.service is masked”
+# SOURCE: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=837788#31
+rm /lib/systemd/system/munin.service
+systemctl enable munin
+systemctl start munin
+
 # Restart services.
 restart_service munin
 restart_service munin-node
